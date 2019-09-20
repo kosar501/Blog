@@ -69,9 +69,9 @@ class IndexController extends Controller
             return($xmlWriter->getData());
         }
 
-//1st working template load and inject content via xml...
+        //1st working template load and inject content via xml...
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor("word.docx");
-//Try and build xml from objects and insert xml instead...
+        //Try and build xml from objects and insert xml instead...
         $phpWord = new PhpWord();
         dd($phpWord);
 
@@ -84,7 +84,7 @@ class IndexController extends Controller
         for($i=0;$i < 25;$i++){
             $section->addText("Hello world $i");
         }
-//Table add test
+        //Table add test
         $tbl = $section->addTable(array(
             "layout" => Table::LAYOUT_AUTO,
             "width"	 => 100 * 50, //in word 1% == 50 unit (with in 1/50)
@@ -109,12 +109,12 @@ class IndexController extends Controller
 
         $elXml = containerToXML($section);
 
-// remplace our templateContent
+        // remplace our templateContent
         Settings::setOutputEscapingEnabled(false);
         $templateProcessor->setValue('content', $elXml);
         Settings::setOutputEscapingEnabled(true);
 
-// Save the file :
+        // Save the file :
         $templateProcessor->saveAs("word1.docx");
     }
 
@@ -139,15 +139,15 @@ class IndexController extends Controller
 
         $description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
 
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
 
         $section->addImage("http://itsolutionstuff.com/frontTheme/images/logo.png");
@@ -167,4 +167,5 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
         return response()->download(storage_path('helloWorld.docx'));
     }
+
 }
